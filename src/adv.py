@@ -42,8 +42,10 @@ room["narrow"].w_to = room["foyer"]
 room["narrow"].n_to = room["treasure"]
 room["treasure"].s_to = room["narrow"]
 
+# Activate the game globally
+# TODO: come up with a non-global way of doing this
+game_active = True
 
-# Declare all the rooms
 
 room = {
     'outside':  Room("Outside Cave Entrance",
