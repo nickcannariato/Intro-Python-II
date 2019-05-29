@@ -74,39 +74,36 @@ def list_controls():
     print("[M]ove: [N]orth, [S]outh, [E]ast, [W]est")
     print("[Q]uit\n")
 
-    'narrow':   Room("Narrow Passage", """The narrow passage bends here from west
-to north. The smell of gold permeates the air."""),
 
-    'treasure': Room("Treasure Chamber", """You've found the long-lost treasure
-chamber! Sadly, it has already been completely emptied by
-earlier adventurers. The only exit is to the south."""),
-}
+def main():
+    current_room = room["outside"]
+
+    # Prompt the player for a character name
+    char_name = input("Please name your hero to begin your quest:\n>")
+    player1 = Player(char_name, current_room, [])
+    print(f"\nWelcome {player1.name}!\n")
+
+    # List the controls for new players
+    list_controls()
+
+    # Run the game "event loop"
+    while game_active:
+
+        # Print the current room name
+        print(
+            f"""
+        LOCATION: {player1.location.name}
+        -{player1.location.description}-
+        """
+        )
+
+        # Waits for user decision
+        print("What next?")
+        print("Type [L]ist to view commands")
+        user_input = input("\n>").lower()
+
+        analize_input(player1, user_input)
 
 
-# Link rooms together
-
-room['outside'].n_to = room['foyer']
-room['foyer'].s_to = room['outside']
-room['foyer'].n_to = room['overlook']
-room['foyer'].e_to = room['narrow']
-room['overlook'].s_to = room['foyer']
-room['narrow'].w_to = room['foyer']
-room['narrow'].n_to = room['treasure']
-room['treasure'].s_to = room['narrow']
-
-#
-# Main
-#
-
-# Make a new player object that is currently in the 'outside' room.
-
-# Write a loop that:
-#
-# * Prints the current room name
-# * Prints the current description (the textwrap module might be useful here).
-# * Waits for user input and decides what to do.
-#
-# If the user enters a cardinal direction, attempt to move to the room there.
-# Print an error message if the movement isn't allowed.
-#
-# If the user enters "q", quit the game.
+if __name__ == "__main__":
+    main()
