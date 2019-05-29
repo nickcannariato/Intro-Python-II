@@ -47,9 +47,10 @@ room["treasure"].s_to = room["narrow"]
 game_active = True
 
 
-room = {
-    'outside':  Room("Outside Cave Entrance",
-                     "North of you, the cave mount beckons"),
+def bad_move():
+    print("You can not go that way")
+
+
 
     'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
 passages run north and east."""),
