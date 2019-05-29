@@ -51,7 +51,7 @@ def bad_move():
     print("You can not go that way")
 
 
-def analize_input(player, user_input):
+def process_user_command(player, user_input):
     global game_active
     command = list(user_input.strip().replace(" ", ""))
 
@@ -101,8 +101,8 @@ def attempt_move(player, direction):
 
 def list_controls():
     print("GAME CONTROLS")
-    print("[M]ove: [N]orth, [S]outh, [E]ast, [W]est")
-    print("[Q]uit\n")
+    print("Move your character: M + [N]orth, [S]outh, [E]ast, or [W]est")
+    print("[Q]uit the game\n")
 
 
 def main():
@@ -132,7 +132,7 @@ def main():
         print("Type [L]ist to view commands")
         user_input = input("\n>").lower()
 
-        analize_input(player1, user_input)
+        process_user_command(player1, user_input)
 
 
 if __name__ == "__main__":
