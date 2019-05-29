@@ -3,9 +3,9 @@ class Player:
     
     Args:
         name: String -- The name of the Player
-        location: String -- the current Room the player is in
+        current_room: String -- the current Room the player is in
     """
 
-    def __init__(self, name, location):
+    def __init__(self, name, current_room):
         self.name = name
-        self.location = location
+        self.current_room = current_room

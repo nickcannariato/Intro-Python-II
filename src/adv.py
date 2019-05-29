@@ -57,7 +57,7 @@ def process_user_command(player, user_input):
 
     if command[0][0] == "q":
         print("\nAre you sure you wish to quit the game? [Y/N]\n")
-        quit_game = input(">")
+        quit_game = input("> ")
         if quit_game.lower() == "y":
             game_active = False
 
@@ -90,9 +90,9 @@ def attempt_move(player, direction):
     print("\nAttempted to move... \n")
     attribute = direction + "_to"
 
-    if hasattr(player.location, attribute):
-        next_room = getattr(player.location, attribute)
-        player.location = next_room
+    if hasattr(player.current_room, attribute):
+        next_room = getattr(player.current_room, attribute)
+        player.current_room = next_room
         return
 
     else:
@@ -109,8 +109,8 @@ def main():
     current_room = room["outside"]
 
     # Prompt the player for a character name
-    char_name = input("Please name your hero to begin your quest:\n>")
-    player1 = Player(char_name, current_room, [])
+    char_name = input("Please name your hero to begin your quest:\n> ")
+    player1 = Player(char_name, current_room)
     print(f"\nWelcome {player1.name}!\n")
 
     # List the controls for new players
@@ -122,15 +122,15 @@ def main():
         # Print the current room name
         print(
             f"""
-        LOCATION: {player1.location.name}
-        -{player1.location.description}-
+        current_room: {player1.current_room.name}
+        -{player1.current_room.description}-
         """
         )
 
         # Waits for user decision
         print("What next?")
         print("Type [L]ist to view commands")
-        user_input = input("\n>").lower()
+        user_input = input("\n> ").lower()
 
         process_user_command(player1, user_input)
 
