@@ -1,6 +1,6 @@
 class Room:
     """A geographical area in the game.
-    
+
     Args:
         name: String -- the name of the location
         description: String -- a description for the location
