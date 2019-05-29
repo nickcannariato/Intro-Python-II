@@ -51,9 +51,39 @@ def bad_move():
     print("You can not go that way")
 
 
+def analize_input(player, user_input):
+    global game_active
+    command = list(user_input.strip().replace(" ", ""))
 
-    'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
-passages run north and east."""),
+    if command[0][0] == "q":
+        print("\nAre you sure you wish to quit the game? [Y/N]\n")
+        quit_game = input(">")
+        if quit_game.lower() == "y":
+            game_active = False
+
+    elif command[0][0] == "m":
+        if len(command) < 2:
+            print("You must include a direction [N/S/E/W] when trying to move")
+            return
+
+        elif command[1][0] == "n":
+            attempt_move(player, "n")
+
+        elif command[1][0] == "e":
+            attempt_move(player, "e")
+
+        elif command[1][0] == "s":
+            attempt_move(player, "s")
+
+        elif command[1][0] == "w":
+            attempt_move(player, "w")
+
+        else:
+            print("You must include a direction [N/S/E/W] when trying to move")
+            return
+
+    elif command[0][0] == "l":
+        list_controls()
 
 
 def attempt_move(player, direction):
