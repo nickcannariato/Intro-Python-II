@@ -1,7 +1,11 @@
 class Room:
-    """The room class contains a constructor to instanciate a new room.
-    The room contains a method to print it's description. Trigger the
-    method on this room when a player enters"""
+    """A geographical area in the game.
+    
+    Args:
+        name: String -- the name of the location
+        description: String -- a description for the location
+        [inventory]: List -- the items found in the room
+    """
 
     def __init__(self, name, description, inventory=None):
         self.name = name

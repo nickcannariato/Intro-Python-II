@@ -1,7 +1,11 @@
 class Player:
-    """The main hero player for our text based adventure."""
+    """An object to represent the Player
+    
+    Args:
+        name: String -- The name of the Player
+        location: String -- the current Room the player is in
+    """
 
-    def __init__(self, name, location, inventory):
+    def __init__(self, name, location):
         self.name = name
         self.location = location
-        self.inventory = inventory
