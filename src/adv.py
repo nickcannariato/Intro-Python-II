@@ -69,6 +69,10 @@ def attempt_move(player, direction):
         bad_move()
 
 
+def list_controls():
+    print("GAME CONTROLS")
+    print("[M]ove: [N]orth, [S]outh, [E]ast, [W]est")
+    print("[Q]uit\n")
 
     'narrow':   Room("Narrow Passage", """The narrow passage bends here from west
 to north. The smell of gold permeates the air."""),
