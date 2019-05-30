@@ -48,14 +48,31 @@ class Player:
             print(f"There don't appear to be any items in {self.current_room}")
             return
 
-        item = list(filter(lambda i: i.name == item_name, room_items))[0]
+        item = list(filter(lambda i: i.name == item_name, room_items))
 
-        if not isinstance(item, Item):
+        if not item:
+            print(f"{item_name} isn't in this room")
+
+        if not isinstance(item[0], Item):
             print("It doesn't look like you can pick that up")
             return
 
-        self.current_room.inventory.remove(item)
-        self.inventory.append(item)
+        self.current_room.inventory.remove(item[0])
+        self.inventory.append(item[0])
         clear_screen()
-        item.on_take()
+        item[0].on_take()
+
+    def drop_item(self, item_name):
+        if self.inventory is None or not self.inventory:
+            print("You're not currently carrying anything")
+            return
+
+        item = list(filter(lambda i: i.name == item_name, self.inventory))
+
+        if not item:
+            print(f"{item_name} isn't in your inventory")
+
+        self.current_room.inventory.append(item[0])
+        self.inventory.remove(item[0])
+        item[0].on_take()
 

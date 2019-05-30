@@ -34,7 +34,8 @@ def list_controls():
     print("GAME CONTROLS")
     print("[M]ove your character: [N]orth, [S]outh, [E]ast, or [W]est")
     print("To list your inventory: [I] or [inventory]")
-    print("To pick up an item in the room: [get] [item]")
+    print("To take an item from a room: [get] [item]")
+    print("To drop an item in a room: [drop] [item]")
     print("[Q]uit the game\n")
 
 
@@ -102,11 +103,10 @@ def process_user_command(player, user_input, active_game):
         player.list_inventory()
 
     elif command[0] == "get" or command[0] == "take":
-        print("getting an item from the room", command[1])
         player.get_item(command[1])
 
     elif command[0] == "drop":
-        print("dropping an item into the room", command[1])
+        player.drop_item(command[1])
 
     # Handle [L]ist command to view controls
     elif command[0] == "l":
