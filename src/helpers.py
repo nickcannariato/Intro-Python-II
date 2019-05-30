@@ -33,8 +33,8 @@ def list_controls():
     print("-" * 80)
     print("GAME CONTROLS")
     print("[M]ove your character: [N]orth, [S]outh, [E]ast, or [W]est")
-    print("To list your inventory: [I]")
-    print("To pick up an item: [get] [item]")
+    print("To list your inventory: [I] or [inventory]")
+    print("To pick up an item in the room: [get] [item]")
     print("[Q]uit the game\n")
 
 
