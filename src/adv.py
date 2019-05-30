@@ -10,9 +10,13 @@ from helpers import (
     process_user_command,
 )
 
+item = {"crowbar": Item("crowbar", "Useful for breaking boxes open")}
+
 room = {
     "outside": Room(
-        "Outside Cave Entrance", "North of you, the cave mount beckons", ["crowbar"]
+        "Outside Cave Entrance",
+        "North of you, the cave mount beckons",
+        [item["crowbar"]],
     ),
     "foyer": Room(
         "Foyer",
@@ -50,8 +54,6 @@ room["overlook"].s_to = room["foyer"]
 room["narrow"].w_to = room["foyer"]
 room["narrow"].n_to = room["treasure"]
 room["treasure"].s_to = room["narrow"]
-
-item = {"crowbar": Item("crowbar", "Useful for breaking boxes open")}
 
 
 def main():
