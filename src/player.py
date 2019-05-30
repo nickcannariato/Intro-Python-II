@@ -36,7 +36,7 @@ class Player:
         for item in self.inventory:
             print(f"\t* {item}")
 
-    def get_item(self, item_name):
+    def get_item(self, item_name: str):
         if self.inventory is None:
             self.inventory = []
 
@@ -62,7 +62,7 @@ class Player:
         clear_screen()
         item[0].on_take()
 
-    def drop_item(self, item_name):
+    def drop_item(self, item_name: str):
         if self.inventory is None or not self.inventory:
             print("You're not currently carrying anything")
             return
@@ -74,5 +74,4 @@ class Player:
 
         self.current_room.inventory.append(item[0])
         self.inventory.remove(item[0])
-        item[0].on_take()
-
+        item[0].on_drop()

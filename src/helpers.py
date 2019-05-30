@@ -44,7 +44,7 @@ def info_screen(player: dict):
     print("- Items in reach: ", player.current_room.inventory, "-\n")
 
 
-def attempt_move(player, direction):
+def attempt_move(player, direction: str):
     clear_screen()
     print_banner("\nAttempting to move... \n")
     sleep(0.5)
