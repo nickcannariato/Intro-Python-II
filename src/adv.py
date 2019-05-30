@@ -1,9 +1,18 @@
 from room import Room
 from player import Player
+from item import Item
+from helpers import (
+    clear_screen,
+    get_character_name,
+    info_screen,
+    list_controls,
+    print_banner,
+    process_user_command,
+)
 
 room = {
     "outside": Room(
-        "Outside Cave Entrance", "North of you, the cave mount beckons", []
+        "Outside Cave Entrance", "North of you, the cave mount beckons", ["crowbar"]
     ),
     "foyer": Room(
         "Foyer",
@@ -42,97 +51,34 @@ room["narrow"].w_to = room["foyer"]
 room["narrow"].n_to = room["treasure"]
 room["treasure"].s_to = room["narrow"]
 
-# Activate the game globally
-# TODO: come up with a non-global way of doing this
-game_active = True
-
-
-def bad_move():
-    print("You can not go that way")
-
-
-def process_user_command(player, user_input):
-    global game_active
-    command = list(user_input.strip().replace(" ", ""))
-
-    if command[0][0] == "q":
-        print("\nAre you sure you wish to quit the game? [Y/N]\n")
-        quit_game = input("> ")
-        if quit_game.lower() == "y":
-            game_active = False
-
-    elif command[0][0] == "m":
-        if len(command) < 2:
-            print("You must include a direction [N/S/E/W] when trying to move")
-            return
-
-        elif command[1][0] == "n":
-            attempt_move(player, "n")
-
-        elif command[1][0] == "e":
-            attempt_move(player, "e")
-
-        elif command[1][0] == "s":
-            attempt_move(player, "s")
-
-        elif command[1][0] == "w":
-            attempt_move(player, "w")
-
-        else:
-            print("You must include a direction [N/S/E/W] when trying to move")
-            return
-
-    elif command[0][0] == "l":
-        list_controls()
-
-
-def attempt_move(player, direction):
-    print("\nAttempted to move... \n")
-    attribute = direction + "_to"
-
-    if hasattr(player.current_room, attribute):
-        next_room = getattr(player.current_room, attribute)
-        player.current_room = next_room
-        return
-
-    else:
-        bad_move()
-
-
-def list_controls():
-    print("GAME CONTROLS")
-    print("Move your character: M + [N]orth, [S]outh, [E]ast, or [W]est")
-    print("[Q]uit the game\n")
+item = {"crowbar": Item("crowbar", "Useful for breaking boxes open")}
 
 
 def main():
     current_room = room["outside"]
 
     # Prompt the player for a character name
-    char_name = input("Please name your hero to begin your quest:\n> ")
+    char_name = get_character_name()
     player1 = Player(char_name, current_room)
-    print(f"\nWelcome {player1.name}!\n")
 
     # List the controls for new players
     list_controls()
 
+    # Indicate that the user is playing the game now
+    playing = True
+
     # Run the game "event loop"
-    while game_active:
+    while playing:
 
         # Print the current room name
-        print(
-            f"""
-        current_room: {player1.current_room.name}
-        -{player1.current_room.description}-
-        """
-        )
+        info_screen(player1)
 
         # Waits for user decision
         print("What next?")
         print("Type [L]ist to view commands")
         user_input = input("\n> ").lower()
 
-        process_user_command(player1, user_input)
+        playing = process_user_command(player1, user_input, playing)
 
 
 if __name__ == "__main__":
