@@ -11,3 +11,7 @@ class Room:
         self.name = name
         self.description = description
         self.inventory = inventory
+
+    def __str__(self):
+        """The string representation of a room"""
+        return f"{self.name}\n{self.description}"
