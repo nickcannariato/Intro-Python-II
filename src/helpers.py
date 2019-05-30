@@ -33,7 +33,8 @@ def list_controls():
     print("-" * 80)
     print("GAME CONTROLS")
     print("[M]ove your character: [N]orth, [S]outh, [E]ast, or [W]est")
-    print("[I]tem: [G]rab, [D]rop, [L]ist inventory")
+    print("To list your inventory: [I]")
+    print("To pick up an item: [get] [item]")
     print("[Q]uit the game\n")
 
 
@@ -62,8 +63,7 @@ def attempt_move(player, direction):
 
 
 def process_user_command(player, user_input, active_game):
-    command = list(user_input.strip().replace(" ", ""))
-    print(command)
+    command = user_input.strip().split()
 
     # Handle empty input from user
     if not command:
@@ -71,7 +71,7 @@ def process_user_command(player, user_input, active_game):
         return True
 
     # Handle [q]uit command
-    if command[0][0] == "q":
+    if command[0] == "q":
         print("\nAre you sure you wish to quit the game? [Y/N]\n")
         quit_game = input("> ")
         if quit_game.lower() == "y":
@@ -79,29 +79,37 @@ def process_user_command(player, user_input, active_game):
 
     # Handle [M]ovement commands
     elif command[0][0] == "m":
-        if len(command) < 2:
+        if len(command[0]) < 2:
             print("You must include a direction [N/S/E/W] when trying to move")
 
-        elif command[1][0] == "n":
+        elif command[0][1] == "n":
             attempt_move(player, "n")
 
-        elif command[1][0] == "e":
+        elif command[0][1] == "e":
             attempt_move(player, "e")
 
-        elif command[1][0] == "s":
+        elif command[0][1] == "s":
             attempt_move(player, "s")
 
-        elif command[1][0] == "w":
+        elif command[0][1] == "w":
             attempt_move(player, "w")
 
         else:
             print("You must include a direction [N/S/E/W] when trying to move")
 
-    # # Handle [I]nventory commands
-    # if command[0][0] == 'i':
+    # Handle [I]nventory commands
+    elif command[0] == "i" or command[0] == "inventory":
+        player.list_inventory()
+
+    elif command[0] == "get" or command[0] == "take":
+        print("getting an item from the room", command[1])
+        player.get_item(command[1])
+
+    elif command[0] == "drop":
+        print("dropping an item into the room", command[1])
 
     # Handle [L]ist command to view controls
-    elif command[0][0] == "l":
+    elif command[0] == "l":
         list_controls()
 
     return True
